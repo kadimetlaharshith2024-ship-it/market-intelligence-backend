@@ -1,28 +1,19 @@
-package com.harshith.marketintelligence.config;
+package com.harshith.marketintelligence.controller;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.*;
+import com.harshith.marketintelligence.dto.DashboardResponse;
+import com.harshith.marketintelligence.service.DashboardService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Configuration
-public class CorsConfig {
+@RestController
+public class DashboardController {
 
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
+    @Autowired
+    private DashboardService dashboardService;
 
-        return new WebMvcConfigurer() {
-
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-
-                registry.addMapping("/**")
-                        .allowedOriginPatterns(
-                                "http://localhost:5173",
-                                "https://*.vercel.app"
-                        )
-                        .allowedMethods("*")
-                        .allowedHeaders("*");
-            }
-        };
+    @GetMapping("/dashboard")
+    public DashboardResponse getDashboard() {
+        return dashboardService.getDashboard();
     }
 }
