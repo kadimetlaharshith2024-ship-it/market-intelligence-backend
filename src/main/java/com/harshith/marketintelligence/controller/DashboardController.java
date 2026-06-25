@@ -1,24 +1,28 @@
-package com.harshith.marketintelligence.controller;
+package com.harshith.marketintelligence.config;
 
-import com.harshith.marketintelligence.dto.DashboardResponse;
-import com.harshith.marketintelligence.service.DashboardService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.*;
 
-@RestController
-@CrossOrigin(origins = {
-        "http://localhost:5173",
-        "http://localhost:5174"
-})
-public class DashboardController {
+@Configuration
+public class CorsConfig {
 
-    @Autowired
-    private DashboardService dashboardService;
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
 
-    @GetMapping("/dashboard")
-    public DashboardResponse getDashboard() {
-        return dashboardService.getDashboard();
+        return new WebMvcConfigurer() {
+
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+
+                registry.addMapping("/**")
+                        .allowedOriginPatterns(
+                                "http://localhost:5173",
+                                "https://*.vercel.app"
+                        )
+                        .allowedMethods("*")
+                        .allowedHeaders("*");
+            }
+        };
     }
 }
