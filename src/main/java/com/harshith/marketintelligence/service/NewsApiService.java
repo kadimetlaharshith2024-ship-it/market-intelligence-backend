@@ -80,7 +80,7 @@ public class NewsApiService {
     public List<Article> getAluminumNews() {
 
         String url =
-                "https://newsapi.org/v2/everything?q=\"aluminum price\"&sortBy=publishedAt&pageSize=10&language=en&apiKey="
+                "https://newsapi.org/v2/everything?q=aluminium OR aluminum&sortBy=publishedAt&pageSize=10&language=en&apiKey="
                         + apiKey;
 
         NewsResponse response =
@@ -90,7 +90,10 @@ public class NewsApiService {
                 .stream()
                 .filter(article ->
                         article.getTitle() != null &&
-                                article.getTitle().toLowerCase().contains("aluminum"))
+                                (
+                                        article.getTitle().toLowerCase().contains("aluminum") ||
+                                                article.getTitle().toLowerCase().contains("aluminium")
+                                ))
                 .limit(3)
                 .toList();
     }
