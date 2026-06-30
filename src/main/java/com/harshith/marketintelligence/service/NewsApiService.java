@@ -4,6 +4,7 @@ import com.harshith.marketintelligence.model.Article;
 import com.harshith.marketintelligence.model.NewsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,6 +19,7 @@ public class NewsApiService {
     @Value("${news.api.key}")
     private String apiKey;
 
+    @Cacheable(value = "news", key = "'gold'")
     public List<Article> getGoldNews() {
 
         String url =
@@ -36,6 +38,7 @@ public class NewsApiService {
                 .toList();
     }
 
+    @Cacheable(value = "news", key = "'silver'")
     public List<Article> getSilverNews() {
 
         String url =
@@ -54,6 +57,7 @@ public class NewsApiService {
                 .toList();
     }
 
+    @Cacheable(value = "news", key = "'copper'")
     public List<Article> getCopperNews() {
 
         String url =
@@ -72,6 +76,7 @@ public class NewsApiService {
                 .toList();
     }
 
+    @Cacheable(value = "news", key = "'aluminum'")
     public List<Article> getAluminumNews() {
 
         String url =
@@ -90,6 +95,7 @@ public class NewsApiService {
                 .toList();
     }
 
+    @Cacheable(value = "news", key = "'platinum'")
     public List<Article> getPlatinumNews() {
 
         String url =
@@ -108,6 +114,7 @@ public class NewsApiService {
                 .toList();
     }
 
+    @Cacheable(value = "news", key = "'oil'")
     public List<Article> getOilNews() {
 
         String url =

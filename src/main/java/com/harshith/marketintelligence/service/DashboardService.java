@@ -1,5 +1,6 @@
 package com.harshith.marketintelligence.service;
 
+
 import com.harshith.marketintelligence.dto.DashboardResponse;
 import com.harshith.marketintelligence.dto.NewsDashboardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
